@@ -1,0 +1,53 @@
+{
+  "name": "coffeeCornerApi",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "api/coffeeCornerApi/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/api/coffeeCornerApi",
+        "main": "api/coffeeCornerApi/src/main.ts",
+        "tsConfig": "api/coffeeCornerApi/tsconfig.app.json",
+        "assets": ["api/coffeeCornerApi/src/assets"],
+        "webpackConfig": "api/coffeeCornerApi/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "coffeeCornerApi:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "coffeeCornerApi:build:development"
+        },
+        "production": {
+          "buildTarget": "coffeeCornerApi:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "api/coffeeCornerApi/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
