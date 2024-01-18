@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('coffeeCorner-e2e', () => {
+describe('coffee-science-e2e', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {

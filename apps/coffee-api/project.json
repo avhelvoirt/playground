@@ -1,7 +1,7 @@
 {
-  "name": "coffeeCornerApi",
+  "name": "coffee-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "api/coffeeCornerApi/src",
+  "sourceRoot": "apps/coffee-api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,11 +11,11 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/api/coffeeCornerApi",
-        "main": "api/coffeeCornerApi/src/main.ts",
-        "tsConfig": "api/coffeeCornerApi/tsconfig.app.json",
-        "assets": ["api/coffeeCornerApi/src/assets"],
-        "webpackConfig": "api/coffeeCornerApi/webpack.config.js"
+        "outputPath": "dist/apps/coffee-api",
+        "main": "apps/coffee-api/src/main.ts",
+        "tsConfig": "apps/coffee-api/tsconfig.app.json",
+        "assets": ["apps/coffee-api/src/assets"],
+        "webpackConfig": "apps/coffee-api/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -26,14 +26,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "coffeeCornerApi:build"
+        "buildTarget": "coffee-api:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "coffeeCornerApi:build:development"
+          "buildTarget": "coffee-api:build:development"
         },
         "production": {
-          "buildTarget": "coffeeCornerApi:build:production"
+          "buildTarget": "coffee-api:build:production"
         }
       }
     },
@@ -45,7 +45,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "api/coffeeCornerApi/jest.config.ts"
+        "jestConfig": "apps/coffee-api/jest.config.ts"
       }
     }
   },

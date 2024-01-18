@@ -1,14 +1,14 @@
 {
-  "name": "coffeeCornerApi-e2e",
+  "name": "coffee-api-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["coffeeCornerApi"],
+  "implicitDependencies": ["coffee-api"],
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "api/coffeeCornerApi-e2e/jest.config.ts",
+        "jestConfig": "apps/coffee-api-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },

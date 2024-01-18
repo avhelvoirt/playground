@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'coffeeCorner',
+  displayName: 'coffee-science',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/coffeeCorner',
+  coverageDirectory: '../../coverage/apps/coffee-science',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
