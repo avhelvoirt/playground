@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { brewingController } from '../brewing/brewing.controller';
+import { BrewingCategoryController } from './brewing-category.controller';
+import { BrewingCategory } from './brewing-category.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature()],
-  controllers: [brewingController],
+  imports: [TypeOrmModule.forFeature([BrewingCategory])],
+  controllers: [BrewingCategoryController],
 })
 export class BrewingCategoryModule {}

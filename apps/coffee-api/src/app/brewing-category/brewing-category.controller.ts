@@ -13,19 +13,19 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BrewingCattegory } from './brewing-category.entity';
+import { BrewingCategory } from './brewing-category.entity';
 import { Repository } from 'typeorm';
-import { brewingController } from '../brewing/brewing.controller';
+import { BrewingController } from '../brewing/brewingController';
 import { BrewingCreateDto } from '../brewing/dto/brewing-create.dto';
 import { GrindUpdateDto } from '../grind/dto/grind-update.dto';
 
 @Controller('/brewing-category')
 export class BrewingCategoryController {
-  private readonly logger = new Logger(brewingController.name);
+  private readonly logger = new Logger(BrewingController.name);
 
   constructor(
-    @InjectRepository(BrewingCattegory)
-    private readonly repository: Repository<BrewingCattegory>
+    @InjectRepository(BrewingCategory)
+    private readonly repository: Repository<BrewingCategory>
   ) {}
 
   @Get()
