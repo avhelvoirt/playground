@@ -1,4 +1,4 @@
-import { Grind } from '../src/app/grinds/grind.entity';
+import { Grind } from '../src/app/grind/grind.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { registerAs } from '@nestjs/config';
 

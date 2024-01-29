@@ -7,4 +7,4 @@ import { GrindController } from './grind.controller';
   imports: [TypeOrmModule.forFeature([Grind])],
   controllers: [GrindController],
 })
-export class GrindsModule {}
+export class GrindModule {}
