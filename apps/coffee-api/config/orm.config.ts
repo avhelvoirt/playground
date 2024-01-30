@@ -3,6 +3,8 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { registerAs } from '@nestjs/config';
 import { Brewing } from '../src/app/brewing/brewing.entity';
 import { BrewingMethode } from '../src/app/brewing-methode/brewing-methode.entity';
+import { CoffeeBean } from '../src/app/coffee-bean/coffee-bean.entity';
+import { BrewingCategory } from '../src/app/brewing-category/brewing-category.entity';
 
 export default registerAs(
   'orm.config',
@@ -13,7 +15,7 @@ export default registerAs(
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [Grind, Brewing, BrewingMethode],
+    entities: [Grind, Brewing, BrewingMethode, CoffeeBean, BrewingCategory],
     synchronize: true,
   })
 );

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Brewing } from '../brewing/brewing.entity';
 
 @Entity('brewing-category')
 export class BrewingCategory {
@@ -7,4 +14,10 @@ export class BrewingCategory {
 
   @Column()
   name: string;
+
+  @ManyToMany(() => Brewing, (brewing) => brewing.brewingCategory, {
+    cascade: true,
+  })
+  @JoinTable()
+  brewings: Brewing[];
 }
