@@ -8,33 +8,27 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BrewingMethode } from './brewing-methode.entity';
-import { Repository } from 'typeorm';
 import { BrewingMethodeCreateDto } from './dto/brewing-methode-create.dto';
+import { BrewingMethodeService } from './brewing-methode.service';
 
-@Controller('/brewingMethode')
+@Controller('/brewingMethods')
 export class BrewingMethodeController {
   private readonly logger = new Logger(BrewingMethodeController.name);
 
-  constructor(
-    @InjectRepository(BrewingMethode)
-    private readonly repository: Repository<BrewingMethode>
-  ) {}
+  constructor(private readonly brewingMethodeService: BrewingMethodeService) {}
 
   @Get()
   async findAll() {
-    this.logger.log('find all was called.');
-    const brewingMethode = await this.repository.find();
-    this.logger.debug(`found ${brewingMethode.length} brewing methodes`);
-    return brewingMethode;
+    const brewingMethods = await this.brewingMethodeService.getBrewingMethods();
+    this.logger.debug(`found ${brewingMethods.length} brewing methodes`);
+    return brewingMethods;
   }
 
   @Get(':name')
-  async findOne(@Param('name') name) {
-    const brewingMethode = await this.repository.findOneBy({
-      name: name,
-    });
+  async findOne(@Param('name') name: string) {
+    const brewingMethode = await this.brewingMethodeService.getBrewingMethode(
+      name
+    );
 
     if (!brewingMethode) {
       throw new NotFoundException();
@@ -45,9 +39,8 @@ export class BrewingMethodeController {
 
   @Post()
   async create(@Body(ValidationPipe) input: BrewingMethodeCreateDto) {
-    const brewingMethode = await this.repository.save({
-      ...input,
-    });
+    const brewingMethode =
+      await this.brewingMethodeService.createBrewingMethode(input);
 
     if (!brewingMethode) {
       throw new NotFoundException();
