@@ -14,32 +14,24 @@ import {
 } from '@nestjs/common';
 import { GrindCreateDto } from './dto/grind-create.dto';
 import { GrindUpdateDto } from './dto/grind-update.dto';
-import { Grind } from './grind.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { GrindService } from './grind.service';
 
 @Controller('/grinds')
 export class GrindController {
   private readonly logger = new Logger(GrindController.name);
 
-  constructor(
-    @InjectRepository(Grind)
-    private readonly repository: Repository<Grind>
-  ) {}
+  constructor(private readonly grindService: GrindService) {}
 
   @Get()
   async findAll() {
-    this.logger.log('find all was called.');
-    const grinds = await this.repository.find();
+    const grinds = await this.grindService.getGrinds();
     this.logger.debug(`found ${grinds.length} grinds `);
     return grinds;
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id) {
-    const grind = await this.repository.findOneBy({
-      id: id,
-    });
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const grind = await this.grindService.getGrind(id);
 
     if (!grind) {
       throw new NotFoundException();
@@ -50,9 +42,7 @@ export class GrindController {
 
   @Post()
   async create(@Body(ValidationPipe) input: GrindCreateDto) {
-    const grind = await this.repository.save({
-      ...input,
-    });
+    const grind = await this.grindService.createGrind(input);
 
     if (!grind) {
       throw new NotFoundException();
@@ -62,28 +52,21 @@ export class GrindController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id, @Body() input: GrindUpdateDto) {
-    const grind = await this.repository.findOne(id);
+  async update(@Param('id', ParseIntPipe) id, @Body() input: GrindUpdateDto) {
+    const result = await this.grindService.updateGrind(id, input);
 
-    if (!grind) {
+    if (result.affected !== 1) {
       throw new NotFoundException();
     }
-
-    return await this.repository.save({
-      ...grind,
-      ...input,
-    });
   }
 
   @Delete(':id')
   @HttpCode(204)
-  async remove(@Param('id') id) {
-    const grind = await this.repository.findOne(id);
+  async remove(@Param('id') id: number) {
+    const result = await this.grindService.deleteGrind(id);
 
-    if (!grind) {
+    if (result.affected !== 1) {
       throw new NotFoundException();
     }
-
-    await this.repository.remove(grind);
   }
 }
