@@ -52,7 +52,10 @@ export class GrindController {
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id, @Body() input: GrindUpdateDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() input: GrindUpdateDto
+  ) {
     const result = await this.grindService.updateGrind(id, input);
 
     if (result.affected !== 1) {
