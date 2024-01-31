@@ -12,34 +12,26 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CoffeeBean } from './coffee-bean.entity';
-import { Repository } from 'typeorm';
 import { CoffeeBeanCreateDto } from './dto/coffee-bean-create.dto';
 import { CoffeeBeanUpdateDto } from './dto/coffee-bean-update.dto';
+import { CoffeeBeanService } from './coffee-bean.service';
 
-@Controller('/coffeeBean')
+@Controller('/coffeeBeans')
 export class CoffeeBeanController {
   private readonly logger = new Logger(CoffeeBeanController.name);
 
-  constructor(
-    @InjectRepository(CoffeeBean)
-    private readonly repository: Repository<CoffeeBean>
-  ) {}
+  constructor(private readonly coffeeBeanService: CoffeeBeanService) {}
 
   @Get()
   async findAll() {
-    this.logger.log('find all was called.');
-    const coffeeBeans = await this.repository.find();
+    const coffeeBeans = await this.coffeeBeanService.getCoffeeBeans();
     this.logger.debug(`found ${coffeeBeans.length} coffee beans`);
     return coffeeBeans;
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id) {
-    const coffeeBean = await this.repository.findOneBy({
-      id: id,
-    });
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const coffeeBean = await this.coffeeBeanService.getCoffeeBean(id);
 
     if (!coffeeBean) {
       throw new NotFoundException();
@@ -50,9 +42,7 @@ export class CoffeeBeanController {
 
   @Post()
   async create(@Body(ValidationPipe) input: CoffeeBeanCreateDto) {
-    const coffeeBean = await this.repository.save({
-      ...input,
-    });
+    const coffeeBean = await this.coffeeBeanService.createCoffeeBean(input);
 
     if (!coffeeBean) {
       throw new NotFoundException();
@@ -62,28 +52,21 @@ export class CoffeeBeanController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id, @Body() input: CoffeeBeanUpdateDto) {
-    const coffeeBean = await this.repository.findOne(id);
+  async update(@Param('id') id: number, @Body() input: CoffeeBeanUpdateDto) {
+    const result = await this.coffeeBeanService.updateCoffeeBean(id, input);
 
-    if (!coffeeBean) {
+    if (result.affected !== 1) {
       throw new NotFoundException();
     }
-
-    return await this.repository.save({
-      ...coffeeBean,
-      ...input,
-    });
   }
 
   @Delete(':id')
   @HttpCode(204)
-  async remove(@Param('id') id) {
-    const coffeeBean = await this.repository.findOne(id);
+  async remove(@Param('id') id: number) {
+    const result = await this.coffeeBeanService.deleteCoffeeeBean(id);
 
-    if (!coffeeBean) {
+    if (result.affected !== 1) {
       throw new NotFoundException();
     }
-
-    await this.repository.remove(coffeeBean);
   }
 }
