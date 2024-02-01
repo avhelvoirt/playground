@@ -17,7 +17,7 @@ import { BrewingCreateDto } from '../brewing/dto/brewing-create.dto';
 import { BrewingCategoryService } from './brewing-category.service';
 import { BrewingCategoryUpdateDto } from './dto/brewing-category-update.dto';
 
-@Controller('/brewing-categories')
+@Controller('/brewingCategories')
 export class BrewingCategoryController {
   private readonly logger = new Logger(BrewingController.name);
 
