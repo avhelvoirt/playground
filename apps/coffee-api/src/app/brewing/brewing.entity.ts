@@ -11,7 +11,7 @@ import { CoffeeBean } from '../coffee-bean/coffee-bean.entity';
 import { Grind } from '../grind/grind.entity';
 import { BrewingCategory } from '../brewing-category/brewing-category.entity';
 
-@Entity('brewing')
+@Entity()
 export class Brewing {
   @PrimaryGeneratedColumn()
   id: number;
@@ -38,10 +38,10 @@ export class Brewing {
   waterTemp: number;
 
   @Column()
-  waterInML: string;
+  waterInML: number;
 
   @Column()
-  pullTime: string;
+  pullTime: number;
 
   @Column()
   tasteExperience: number;

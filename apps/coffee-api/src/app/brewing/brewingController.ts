@@ -1,41 +1,37 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Logger,
   NotFoundException,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Brewing } from './brewing.entity';
-import { Repository } from 'typeorm';
 import { BrewingCreateDto } from './dto/brewing-create.dto';
+import { BrewingService } from './brewing.service';
+import { BrewingUpdateDto } from './dto/brewing-update.dto';
 
-@Controller('/brewing')
+@Controller('/brewings')
 export class BrewingController {
   private readonly logger = new Logger(BrewingController.name);
 
-  constructor(
-    @InjectRepository(Brewing)
-    private readonly repository: Repository<Brewing>
-  ) {}
+  constructor(private readonly brewingService: BrewingService) {}
 
   @Get()
   async findAll() {
-    this.logger.log('find all was called.');
-    const brewings = await this.repository.find();
+    const brewings = await this.brewingService.getBrewings();
     this.logger.debug(`found ${brewings.length} brewings`);
     return brewings;
   }
 
-  @Get()
-  async findOne(@Param('id', ParseIntPipe) id) {
-    const brewing = await this.repository.findOneBy({
-      id: id,
-    });
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const brewing = await this.brewingService.getBrewing(id);
 
     if (!brewing) {
       throw new NotFoundException();
@@ -46,15 +42,34 @@ export class BrewingController {
 
   @Post()
   async create(@Body(ValidationPipe) input: BrewingCreateDto) {
-    console.log(input);
-    const brewing = await this.repository.save({
-      ...input,
-    });
+    const brewing = await this.brewingService.createBrewing(input);
 
     if (!brewing) {
       throw new NotFoundException();
     }
 
     return brewing;
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() input: BrewingUpdateDto
+  ) {
+    const result = await this.brewingService.updateBrewing(id, input);
+
+    if (result.affected !== 1) {
+      throw new NotFoundException();
+    }
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  async remove(@Param('id') id: number) {
+    const result = await this.brewingService.deleteBrewing(id);
+
+    if (result.affected !== 1) {
+      throw new NotFoundException();
+    }
   }
 }
