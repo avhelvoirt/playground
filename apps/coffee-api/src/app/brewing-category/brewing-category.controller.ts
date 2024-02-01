@@ -12,35 +12,31 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BrewingCategory } from './brewing-category.entity';
-import { Repository } from 'typeorm';
 import { BrewingController } from '../brewing/brewingController';
 import { BrewingCreateDto } from '../brewing/dto/brewing-create.dto';
-import { GrindUpdateDto } from '../grind/dto/grind-update.dto';
+import { BrewingCategoryService } from './brewing-category.service';
+import { BrewingCategoryUpdateDto } from './dto/brewing-category-update.dto';
 
-@Controller('/brewing-category')
+@Controller('/brewing-categories')
 export class BrewingCategoryController {
   private readonly logger = new Logger(BrewingController.name);
 
   constructor(
-    @InjectRepository(BrewingCategory)
-    private readonly repository: Repository<BrewingCategory>
+    private readonly brewingCategoryService: BrewingCategoryService
   ) {}
 
   @Get()
   async findAll() {
-    this.logger.log('find all was called.');
-    const brewingCategorys = await this.repository.find();
-    this.logger.debug(`found ${brewingCategorys.length}`);
-    return brewingCategorys;
+    const brewingCategories =
+      await this.brewingCategoryService.getBrewingCategories();
+    this.logger.debug(`found ${brewingCategories.length}`);
+    return brewingCategories;
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id) {
-    const brewingCategory = await this.repository.findOneBy({
-      id: id,
-    });
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const brewingCategory =
+      await this.brewingCategoryService.getBrewingCategory(id);
 
     if (!brewingCategory) {
       throw new NotFoundException();
@@ -51,9 +47,8 @@ export class BrewingCategoryController {
 
   @Post()
   async create(@Body(ValidationPipe) input: BrewingCreateDto) {
-    const brewingCategory = await this.repository.save({
-      ...input,
-    });
+    const brewingCategory =
+      await this.brewingCategoryService.createBrewingCategory(input);
 
     if (!brewingCategory) {
       throw new NotFoundException();
@@ -63,28 +58,28 @@ export class BrewingCategoryController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id, @Body() input: GrindUpdateDto) {
-    const brewingCategory = await this.repository.findOne(id);
+  async update(
+    @Param('id') id: number,
+    @Body() input: BrewingCategoryUpdateDto
+  ) {
+    const result = await this.brewingCategoryService.updateBrewingCategory(
+      id,
+      input
+    );
 
-    if (!brewingCategory) {
+    if (result.affected !== 1) {
       throw new NotFoundException();
     }
-
-    return await this.repository.save({
-      ...brewingCategory,
-      ...input,
-    });
   }
 
   @Delete(':id')
   @HttpCode(204)
-  async remove(@Param('id') id) {
-    const brewingCategory = await this.repository.findOne(id);
+  async remove(@Param('id') id: number) {
+    const brewingCategory =
+      await this.brewingCategoryService.deleteBrewingCategory(id);
 
     if (!brewingCategory) {
       throw new NotFoundException();
     }
-
-    await this.repository.remove(brewingCategory);
   }
 }
