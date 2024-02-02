@@ -82,4 +82,42 @@ export class BrewingCategoryController {
       throw new NotFoundException();
     }
   }
+
+  @Get('brewings/:id')
+  async getBrewingsWhereCategoryIdIs(@Param('id') id: number) {
+    const result =
+      await this.brewingCategoryService.getBrewingsWhereCategoryIdIs(id);
+    if (!result) {
+      throw new NotFoundException();
+    }
+    return result;
+  }
+
+  @Post('brewings/:id')
+  async addBrewingToBrewingCategory(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) input: number
+  ) {
+    const brewing = this.brewingCategoryService.addBrewingToBrewingCategory(
+      id,
+      input
+    );
+    if (!brewing) {
+      throw new NotFoundException();
+    }
+    return brewing;
+  }
+
+  @Delete('brewings/:id')
+  @HttpCode(204)
+  async removeBrewingFromBrewingCategory(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) input: number
+  ) {
+    const removeBrewing =
+      this.brewingCategoryService.removeBrewingFromBrewingCategory(id, input);
+    if (!removeBrewing) {
+      throw new NotFoundException();
+    }
+  }
 }

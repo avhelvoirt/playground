@@ -63,4 +63,34 @@ export class BrewingCategoryService {
       .where('id = :id', { id })
       .execute();
   }
+
+  public async getBrewingsWhereCategoryIdIs(brewingCategoryID: number) {
+    return await this.brewingRepository
+      .createQueryBuilder('bc')
+      .relation(BrewingCategory, 'brewings')
+      .of(brewingCategoryID)
+      .loadMany();
+  }
+
+  public async addBrewingToBrewingCategory(
+    brewingCategoryID: number,
+    brewingID: number
+  ) {
+    return await this.brewingRepository
+      .createQueryBuilder('bc')
+      .relation(BrewingCategory, 'brewings')
+      .of(brewingCategoryID)
+      .add(brewingID);
+  }
+
+  public async removeBrewingFromBrewingCategory(
+    brewingCategoryID: number,
+    brewingID: number
+  ) {
+    return await this.brewingRepository
+      .createQueryBuilder('bc')
+      .relation(BrewingCategory, 'brewings')
+      .of(brewingCategoryID)
+      .remove(brewingID);
+  }
 }
