@@ -11,7 +11,7 @@ import { CoffeeBean } from '../coffee-bean/coffee-bean.entity';
 import { Grind } from '../grind/grind.entity';
 import { BrewingCategory } from '../brewing-category/brewing-category.entity';
 
-@Entity()
+@Entity('brewing')
 export class Brewing {
   @PrimaryGeneratedColumn()
   id: number;

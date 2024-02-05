@@ -10,6 +10,7 @@ import { BrewingModule } from './brewing/brewing.module';
 import { BrewingCategoryModule } from './brewing-category/brewing-category.module';
 import ormConfig from '../../config/orm.config';
 import ormConfigProd from '../../config/orm.config.prod';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import ormConfigProd from '../../config/orm.config.prod';
     CoffeeBeanModule,
     BrewingModule,
     BrewingCategoryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
