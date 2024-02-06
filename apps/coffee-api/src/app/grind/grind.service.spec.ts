@@ -9,6 +9,7 @@ describe('grindService', () => {
   let repository: Repository<Grind>;
   let selectQb;
   let deleteQb;
+  let updateQb;
 
   beforeEach(async () => {
     deleteQb = {
@@ -16,8 +17,15 @@ describe('grindService', () => {
       execute: jest.fn(),
     };
 
+    updateQb = {
+      set: jest.fn(),
+      where: jest.fn(),
+      execute: jest.fn(),
+    };
+
     selectQb = {
       delete: jest.fn().mockReturnValue(deleteQb),
+      update: jest.fn().mockReturnValue(updateQb),
       where: jest.fn(),
       execute: jest.fn(),
       orderBy: jest.fn(),
@@ -42,6 +50,31 @@ describe('grindService', () => {
     }).compile();
     service = module.get<GrindService>(GrindService);
     repository = module.get<Repository<Grind>>(getRepositoryToken(Grind));
+  });
+
+  describe('updateGrind', () => {
+    it('should update a grind', async () => {
+      const createQueryBuilderSpy = jest.spyOn(
+        repository,
+        'createQueryBuilder'
+      );
+      const updateSpy = jest.spyOn(selectQb, 'update');
+      const setSpy = jest.spyOn(updateQb, 'set').mockReturnValue(updateQb);
+      const whereSpy = jest.spyOn(updateQb, 'where').mockReturnValue(updateQb);
+      const executeSpy = jest.spyOn(updateQb, 'execute');
+
+      await expect(service.updateGrind(1, {})).resolves.toBe(undefined);
+      expect(createQueryBuilderSpy).toHaveBeenCalledTimes(1);
+      expect(createQueryBuilderSpy).toHaveBeenCalledWith('g');
+
+      expect(updateSpy).toHaveBeenCalledTimes(1);
+      expect(updateSpy).toHaveBeenCalledWith(Grind);
+      expect(setSpy).toHaveBeenCalledWith({ ...Object });
+      expect(setSpy).toHaveBeenCalledTimes(1);
+      expect(whereSpy).toHaveBeenCalledWith('id = :id', { id: 1 });
+      expect(whereSpy).toHaveBeenCalledTimes(1);
+      expect(executeSpy).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('deleteGrind', () => {
