@@ -1,5 +1,5 @@
 import { IsNumber, IsString, Max } from 'class-validator';
-import { BrewingMethode } from '../../brewing-methode/brewing-methode.entity';
+import { BrewingMethod } from '../../brewing-method/brewing-method.entity';
 import { CoffeeBean } from '../../coffee-bean/coffee-bean.entity';
 import { Grind } from '../../grind/grind.entity';
 
@@ -8,7 +8,7 @@ export class BrewingCreateDto {
   name: string;
 
   @IsString()
-  brewingMethode: BrewingMethode;
+  brewingMethod: BrewingMethod;
 
   @IsNumber()
   coffeeBean: CoffeeBean;

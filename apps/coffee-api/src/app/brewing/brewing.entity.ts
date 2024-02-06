@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BrewingMethode } from '../brewing-methode/brewing-methode.entity';
+import { BrewingMethod } from '../brewing-method/brewing-method.entity';
 import { CoffeeBean } from '../coffee-bean/coffee-bean.entity';
 import { Grind } from '../grind/grind.entity';
 import { BrewingCategory } from '../brewing-category/brewing-category.entity';
@@ -19,9 +19,9 @@ export class Brewing {
   @Column()
   name: string;
 
-  @ManyToOne(() => BrewingMethode, (brewingMethode) => brewingMethode.name)
+  @ManyToOne(() => BrewingMethod, (brewingMethod) => brewingMethod.name)
   @JoinColumn()
-  brewingMethode: BrewingMethode;
+  brewingMethod: BrewingMethod;
 
   @ManyToOne(() => CoffeeBean, (coffeeBean) => coffeeBean.id)
   @JoinColumn()

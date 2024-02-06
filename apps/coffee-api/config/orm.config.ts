@@ -2,7 +2,7 @@ import { Grind } from '../src/app/grind/grind.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { registerAs } from '@nestjs/config';
 import { Brewing } from '../src/app/brewing/brewing.entity';
-import { BrewingMethode } from '../src/app/brewing-methode/brewing-methode.entity';
+import { BrewingMethod } from '../src/app/brewing-method/brewing-method.entity';
 import { CoffeeBean } from '../src/app/coffee-bean/coffee-bean.entity';
 import { BrewingCategory } from '../src/app/brewing-category/brewing-category.entity';
 import { User } from '../src/app/auth/user.entity';
@@ -19,7 +19,7 @@ export default registerAs(
     entities: [
       Grind,
       Brewing,
-      BrewingMethode,
+      BrewingMethod,
       CoffeeBean,
       BrewingCategory,
       User,

@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('brewingMethode')
-export class BrewingMethode {
+@Entity('brewingMethod')
+export class BrewingMethod {
   @PrimaryColumn()
   name: string;
 }
