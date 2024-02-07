@@ -16,7 +16,7 @@ import {
 import { GrindCreateDto } from './dto/grind-create.dto';
 import { GrindUpdateDto } from './dto/grind-update.dto';
 import { GrindService } from './grind.service';
-import { AuthGuardJwt } from '../auth/auth-guard.jwt';
+import { AuthGuardJwt } from '../auth/authGuards/auth-guard.jwt';
 
 @Controller('/grinds')
 @UseGuards(AuthGuardJwt)
