@@ -1,0 +1,26 @@
+:root {
+  //colors
+  --c-white: #f0f0f0;
+  --c-body: #121212;
+  --c-background: #202124;
+  --c-black: #000000;
+  --c-hover-bg: grey;
+
+  //theming
+
+  //card
+  --c-card-bg: var(--c-background);
+
+  //inputs
+  --c-input-border-bottom: var(--c-white);
+  --c-input-focus-color: var(--c-white);
+
+  //button
+  --c-button-bg: var(--c-black);
+  --c-button-bg-hover: var(--c-hover-bg);
+
+  --c-txt-button-color: var(--c-white);
+  --c-txt-button-border-color: var(--c-white);
+  --c-txt-button-color-hover: var(--c-hover-bg);
+  --c-txt-button-border-color-hover: var(--c-hover-bg);
+}
