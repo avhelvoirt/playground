@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import * as moment from 'moment';
-
-import { tap } from 'rxjs';
+import { Observable, shareReplay, tap } from 'rxjs';
 import { Localstorage_keysEnum } from './localstorage_keys.enum';
 interface User {
   username: string;
@@ -14,7 +12,7 @@ interface User {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  public login(username: string, password: string) {
+  public login(username: string, password: string): Observable<User> {
     return this.http
       .post<User>('http://localhost:3000/api/auth/login', {
         username,
@@ -24,6 +22,10 @@ export class AuthService {
         tap({
           next: (res) => {
             this.setSession(res);
+            shareReplay();
+          },
+          error: (e) => {
+            alert(`${e.status} ${e.statusText}`);
           },
         })
       );

@@ -6,17 +6,19 @@
       <div class="content">
         <div class="content-details">
           <h1>Login</h1>
-          <div class="input-container">
-            <span class="input-text">Please enter your email.</span>
-            <input placeholder="John_doe@gmail.com" type="email">
-          </div>
-          <div *ngIf="false" class="input-container">
-            <span class="input-text">Please enter your password.</span>
-            <input placeholder="password" type="password">
-          </div>
-          <div class="wrapper-decision">
-            <button class="prim-button">Login</button>
-          </div>
+          <form [formGroup]="loginForm" (submit)="login()">
+            <div class="input-container">
+              <label for="username" class="input-text">Please enter your email.</label>
+              <input id="username" placeholder="John_doe@gmail.com" type="email" formControlName="username">
+            </div>
+            <div *ngIf="loginForm.value.username" class="input-container">
+              <label for="password" class="input-text">Please enter your password.</label>
+              <input id="password" placeholder="password" type="password" formControlName="password">
+            </div>
+            <div class="wrapper-decision">
+              <button class="prim-button" type="submit">Login</button>
+            </div>
+          </form>
           <div class="new-here">
             <span>Click <button class="text-button">here</button> if you're new.</span>
           </div>

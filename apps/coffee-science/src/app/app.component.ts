@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth/auth.service';
 import { AuthComponent } from './auth/auth.component';
 
 @Component({
@@ -14,10 +13,9 @@ import { AuthComponent } from './auth/auth.component';
 export class AppComponent implements OnInit {
   title = 'coffee-science';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.authService.login('avhelvoirt', 'password').subscribe();
     this.getGrind();
   }
 
