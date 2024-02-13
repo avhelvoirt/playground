@@ -30,6 +30,11 @@ export class AuthComponent {
         this.loginForm.value.username ?? '',
         this.loginForm.value.password ?? ''
       )
-      .subscribe();
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        alert(`${error.status} ${error.statusText}`);
+      });
   }
 }
