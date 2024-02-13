@@ -10,6 +10,11 @@ export const appRoutes: Route[] = [
           import('./auth/routes').then((mod) => mod.AUTH_ROUTES),
       },
       {
+        path: 'mainscreen',
+        loadChildren: () =>
+          import('./mainscreen/routes').then((mod) => mod.COFFEE_ROUTES),
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: '/login',

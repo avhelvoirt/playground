@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
-import { MainscreenComponent } from './coffee/mainscreen.component';
+import { MainscreenComponent } from './mainscreen/mainscreen.component';
 
 @Component({
   standalone: true,
