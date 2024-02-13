@@ -5,7 +5,7 @@ export const appRoutes: Route[] = [
     path: '',
     children: [
       {
-        path: 'login',
+        path: '',
         loadChildren: () =>
           import('./auth/routes').then((mod) => mod.AUTH_ROUTES),
       },
@@ -13,11 +13,6 @@ export const appRoutes: Route[] = [
         path: 'mainscreen',
         loadChildren: () =>
           import('./mainscreen/routes').then((mod) => mod.MAINSCREEN_ROUTES),
-      },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/login',
       },
     ],
   },

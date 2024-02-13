@@ -1,0 +1,27 @@
+<div class="container text-center">
+  <div class="row">
+    <div class="col card" >
+      <div class="content">
+        <div class="content-details">
+          <h1>Login</h1>
+          <form [formGroup]="loginForm" (submit)="login()">
+            <div class="input-container">
+              <label for="username" class="input-text">Please enter your email.</label>
+              <input id="username" placeholder="John_doe@gmail.com" type="email" formControlName="username">
+            </div>
+            <div *ngIf="loginForm.value.username" class="input-container">
+              <label for="password" class="input-text">Please enter your password.</label>
+              <input id="password" placeholder="password" type="password" formControlName="password">
+            </div>
+            <div class="wrapper-decision">
+              <button class="prim-button" type="submit">Login</button>
+            </div>
+          </form>
+          <div class="new-here">
+            <span>Click <button class="text-button" (click)="register()">here</button> if you're new.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
