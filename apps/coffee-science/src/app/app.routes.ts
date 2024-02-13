@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
       {
         path: 'mainscreen',
         loadChildren: () =>
-          import('./mainscreen/routes').then((mod) => mod.COFFEE_ROUTES),
+          import('./mainscreen/routes').then((mod) => mod.MAINSCREEN_ROUTES),
       },
       {
         path: '',

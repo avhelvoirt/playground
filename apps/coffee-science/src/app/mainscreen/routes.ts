@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { MainscreenComponent } from './mainscreen.component';
 
-export const COFFEE_ROUTES: Route[] = [
+export const MAINSCREEN_ROUTES: Route[] = [
   {
     path: '',
     children: [
