@@ -6,10 +6,10 @@
           <h1>Login</h1>
           <form [formGroup]="loginForm" (submit)="login()">
             <div class="input-container">
-              <label for="username" class="input-text">Please enter your email.</label>
-              <input id="username" placeholder="John_doe@gmail.com" type="email" formControlName="username">
+              <label for="email" class="input-text">Please enter your email.</label>
+              <input id="email" placeholder="John_doe@gmail.com" type="email" formControlName="email">
             </div>
-            <div *ngIf="loginForm.value.username" class="input-container">
+            <div *ngIf="loginForm.value.email" class="input-container">
               <label for="password" class="input-text">Please enter your password.</label>
               <input id="password" placeholder="password" type="password" formControlName="password">
             </div>

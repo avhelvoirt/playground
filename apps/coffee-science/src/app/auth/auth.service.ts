@@ -22,11 +22,30 @@ export class AuthService {
           password,
         })
         .toPromise();
-
       this.setSession(res);
       return res;
     } catch (e) {
       throw e; // rethrow the error for handling in the component if needed
+    }
+  }
+
+  public async register(
+    username: string,
+    email: string,
+    password: string,
+    retypedPassword: string
+  ) {
+    try {
+      await this.http
+        .post('http://localhost:3000/api/users', {
+          username,
+          email,
+          password,
+          retypedPassword,
+        })
+        .toPromise();
+    } catch (e) {
+      throw e;
     }
   }
 

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -22,7 +22,7 @@ export class LoginComponent {
   login() {
     this.authService
       .login(
-        this.loginForm.value.username ?? '',
+        this.loginForm.value.email ?? '',
         this.loginForm.value.password ?? ''
       )
       .then((res) => {

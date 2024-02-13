@@ -1,1 +1,36 @@
-<p>register works!</p>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col card" >
+      <div class="content">
+        <div class="content-details">
+          <h1>Register</h1>
+          <form [formGroup]="registerForm" (submit)="register()">
+            <div class="input-container">
+              <label for="username" class="input-text">Please enter your username.</label>
+              <input id="username" placeholder="John_doe@gmail.com" type="text" formControlName="username">
+            </div>
+            <div class="input-container">
+              <label for="email" class="input-text">Please enter your email.</label>
+              <input id="email" placeholder="John_doe@gmail.com" type="email" formControlName="email">
+            </div>
+            <div class="input-container">
+              <label for="password" class="input-text">Please enter your password.</label>
+              <input id="password" placeholder="password" type="password" formControlName="password">
+            </div>
+            <div class="input-container">
+              <label for="retypedPassword" class="input-text">Please enter your password again.</label>
+              <input id="retypedPassword" placeholder="password" type="password" formControlName="retypedPassword">
+            </div>
+            <div class="wrapper-decision">
+              <button class="prim-button" type="submit">Register</button>
+            </div>
+          </form>
+          <div class="new-here">
+            <span>Click <button class="text-button" (click)="login()">here</button> if you already have an account.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
