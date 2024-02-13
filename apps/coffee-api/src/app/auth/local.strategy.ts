@@ -16,13 +16,13 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   ) {
     super();
   }
-  public async validate(username: string, password: string): Promise<any> {
+  public async validate(email: string, password: string): Promise<any> {
     const user = await this.userRepository.findOne({
-      where: { username },
+      where: { email },
     });
 
     if (!user) {
-      this.logger.debug(`user ${username} not found!`);
+      this.logger.debug(`user ${email} not found!`);
       throw new UnauthorizedException();
     }
 
