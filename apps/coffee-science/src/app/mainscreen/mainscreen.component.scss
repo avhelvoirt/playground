@@ -1,0 +1,65 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  h2 {
+    padding-bottom: 0.3rem;
+    margin-left: 1rem;
+  }
+
+  .add-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    button {
+      background-color: red;
+      border-style: none;
+      border-radius: 25px;
+      width: 30px;
+      height: 30px;
+      font-size: 1.5rem;
+
+      &:hover {
+        background-color: gray;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.slide-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.horizontal-scroller {
+  padding-left: 1rem;
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+  width: auto;
+  height: 33rem;
+}
+
+.card {
+  min-width: 20rem;
+  height: 32rem;
+  background-color: red;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin-top: 6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .line {
+    width: 5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid white;
+  }
+}
