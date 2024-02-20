@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NavbarComponent } from '../shared/components/navbar.component';
-
+import '@playground/playground-ui';
 @Component({
   selector: 'playground-mainscreen',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
   templateUrl: './mainscreen.component.html',
   styleUrl: './mainscreen.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MainscreenComponent implements OnInit {
   constructor(private http: HttpClient) {}
