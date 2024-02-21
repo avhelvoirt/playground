@@ -14,6 +14,8 @@ import '@playground/playground-ui';
 export class MainscreenComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
+  name = 'Goodbye';
+
   ngOnInit(): void {
     this.getGrind();
   }
