@@ -11,18 +11,27 @@ export class playgroundButton extends LitElement {
       width: fit-content;
       padding: 0.5rem 2rem;
       color: var(--c-txt-button-color);
-
       &:hover {
         cursor: pointer;
         background-color: var(--c-button-bg-hover);
       }
+      &:disabled {
+        background: var(--c-button-bg-disabled);
+        color: var(--c-disabled-txt);
+        cursor: default;
+      }
     }
   `;
 
-  @property() name: string = '';
+  @property() name: string = 'submit';
+  @property() isDisabled: Boolean = false;
 
   override render() {
-    return html` <button @click=${this.handleClick}>${this.name}</button> `;
+    return html`
+      <button @click=${this.handleClick} ?disabled=${this.isDisabled}>
+        ${this.name}
+      </button>
+    `;
   }
 
   handleClick() {
