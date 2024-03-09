@@ -5,6 +5,8 @@
   --c-background: #202124;
   --c-black: #000000;
   --c-hover-bg: grey;
+  --c-disabled: rgba(128, 128, 128, 0.3);
+  --c-disabled-txt: #000000;
 
   //theming
 
@@ -19,6 +21,8 @@
   //button
   --c-button-bg: var(--c-black);
   --c-button-bg-hover: var(--c-hover-bg);
+  --c-button-bg-disabled: var(--c-disabled);
+  --c-button-txt-disabled: var(--c-disabled-txt);
 
   --c-txt-button-color: var(--c-white);
   --c-txt-button-border-color: var(--c-white);
