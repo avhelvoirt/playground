@@ -48,7 +48,11 @@
         <label for="notes"></label>
         <input id="notes" placeholder="please provide notes" />
       </div>
-      <playground-button (submitClicked)="addBrewing()" name="submit"></playground-button>
+      <playground-button
+        (submitClicked)="addBrewing()"
+        name="submit"
+        [isDisabled]="false"
+      ></playground-button>
     </form>
   </div>
 </div>
