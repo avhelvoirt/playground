@@ -1,53 +1,61 @@
 <div class="container">
   <div class="col">
     <form [formGroup]="addBrewingForm" (submit)="addBrewing()">
-      <div class="input-container">
-        <label for="name"></label>
-        <input id="name" placeholder="please provide name" />
-      </div>
+      <playground-form-input
+        fieldID="name"
+        placeholder="please name"
+      ></playground-form-input>
+      <!--      <div class="input-container">-->
+      <!--        &lt;!&ndash;              <label for="name"></label>&ndash;&gt;-->
+      <!--        <input-->
+      <!--          id="name"-->
+      <!--          placeholder="please provide name"-->
+      <!--          formControlName="name"-->
+      <!--        />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="shots"></label>
-        <input id="shots" placeholder="please provide shots" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="shots"></label>-->
+      <!--        <input id="shots" placeholder="please provide shots" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="brewingMethod"></label>
-        <input id="brewingMethod" placeholder="please provide brewingMethode" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="brewingMethod"></label>-->
+      <!--        <input id="brewingMethod" placeholder="please provide brewingMethode" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="grind"></label>
-        <input id="grind" placeholder="please grindID" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="grind"></label>-->
+      <!--        <input id="grind" placeholder="please grindID" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="waterTemp"></label>
-        <input id="waterTemp" placeholder="please provide waterTemp" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="waterTemp"></label>-->
+      <!--        <input id="waterTemp" placeholder="please provide waterTemp" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="waterInML"></label>
-        <input id="waterInML" placeholder="please provide waterInML" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="waterInML"></label>-->
+      <!--        <input id="waterInML" placeholder="please provide waterInML" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="pullTime"></label>
-        <input id="pullTime" placeholder="please provide pullTime" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="pullTime"></label>-->
+      <!--        <input id="pullTime" placeholder="please provide pullTime" />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="tasteExperience"></label>
-        <input
-          id="tasteExperience"
-          placeholder="please provide tasteExperience"
-        />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="tasteExperience"></label>-->
+      <!--        <input-->
+      <!--          id="tasteExperience"-->
+      <!--          placeholder="please provide tasteExperience"-->
+      <!--        />-->
+      <!--      </div>-->
 
-      <div class="input-container">
-        <label for="notes"></label>
-        <input id="notes" placeholder="please provide notes" />
-      </div>
+      <!--      <div class="input-container">-->
+      <!--        <label for="notes"></label>-->
+      <!--        <input id="notes" placeholder="please provide notes" />-->
+      <!--      </div>-->
       <playground-button
         (submitClicked)="addBrewing()"
         name="submit"
